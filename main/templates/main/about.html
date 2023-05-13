@@ -1,0 +1,27 @@
+{% extends 'main/layout.html' %}
+
+{% load static %}
+{% block title%} A propos {% endblock%}
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/privacy-policy.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/about.css' %}">
+{% endblock head %}
+
+{% block body %}
+    
+
+    <section class="image-text py-5">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6">
+              <img src="{% static 'img/logo/logo.png' %}" width="500px" alt="Image" class="img-fluid">
+            </div>
+            <div class="col-md-6 py-5">
+                <h1>Bienvenue sur BusTicket.</h1>
+                <p>Nous sommes ravie de vous retrouver ici. Nous sommes une équipe de passionnés. Notre but est de révolutionner le monde des transports terrestres au Bénin, en vous permettant d’économiser sur vos frais de réservations de ticket bus.<p>
+    </div>
+          </div>
+        </div>
+      </section>
+      
+{% endblock%}

@@ -1,0 +1,33 @@
+{% extends 'main/layout.html' %}
+
+{% load static %}
+{% block title%}Accueil {% endblock%} 
+
+{% block head %}
+    <script type="text/javascript" src="{% static 'js/index.js' %}"></script>
+{% endblock head %}
+
+{% block body %}
+<div class="row popular_destinations m-3">
+    {% for bus in bus %}
+
+    <div class="col-lg-3 col-md-6 m-4">
+        <div class="single_destination" onclick="window.location.href ='{% url 'bus_detail' bus.id %}'">
+            <div class="thumb">
+                <img src="{% static 'img/dest/cotonou2.jpg' %}" alt="">
+            </div>
+            <div class="content">
+                <p class="text-light text-justify-center mx-3"><i class="fa fa-bus"></i> {{bus.bus_name}} </p>
+                <p class="text-light mx-2 text-uppercase text-justify-center">{{bus.source}} <i class="fa fa-exchange"></i> {{bus.dest}} </h4>
+                <p class="text-light">Depart:  {{bus.time| time:"G\hi" }} | {{bus.date}}</p>
+                <p class="text-success text-justify-center"> <i class="fa fa-ticket"></i > F CFA {{bus.price}}</p>
+
+                <button class="btn w-100 text-justify-center" style="background-color:#1B5E20;color:white;">En savoir plus </button>
+            </div>
+        </div>
+    </div>
+    {% endfor%}
+</div>
+  
+
+{% endblock%}

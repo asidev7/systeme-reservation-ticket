@@ -1,0 +1,97 @@
+{% extends 'main/layout.html' %}
+
+{% load static %}
+{% block title%} Accueil {% endblock%} 
+
+{% block head %}
+    <script type="text/javascript" src="{% static 'js/index.js' %}"></script>
+{% endblock head %}
+
+{% block body %}
+    <section class="section first-section" style="background-image: linear-gradient(rgba(3,0,0,2.2),rgba(0,0,0,0.0)), url('{% static 'img/bj.jpg'%}');">
+        <div class="banner-div">
+            <div class="banner">
+                <h5 style="color:white;">et partez vers une de nos <b style="color:red;"> destinations </b>à prix avantageux !
+            <h1 class="banner-text" >
+                Planifiez vos voyages à l'avance 
+            </h1>
+            <br>
+          <p class="text-light">  À vous de trouver,  <b style="color:yellow;"> le meilleur trajet dans notre moteur de recherche.</b><br><br>
+            </h5>
+        </div> 
+        </div>
+        </div>
+    </section>
+
+    
+    <section class="section second-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-6">
+                    <div class="section_title text-center mb_70">
+                        <h2>Les lignes les plus fréquentées</h2>
+                        <p> Busticket vous propose des meilleurs lignes </p>
+                    </div>
+                </div>
+            </div>
+            <div class="row popular_destinations">
+                {% for bus in bus %}
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="single_destination" onclick="window.location.href ='{% url 'bus_detail' bus.id %}';box:rgba(0,1,0,1);">
+                        <div class="thumb">
+                            {% if bus.source == "Parakou" or bus.dest == "Parakou"%}<img src="{% static 'img/dest/cotonou2.jpg' %}" alt="">{%else%}<img src="{% static 'img/dest/cotonou1.jpg' %}" alt=""> {% endif%}
+
+                        </div>
+                        <div class="content">
+                            <p class="text-light text-justify-center mx-3"><i class="fa fa-bus"></i> {{bus.bus_name}} </p>
+                            <p class="text-light mx-2 text-uppercase text-justify-center">{{bus.source}} <i class="fa fa-exchange"></i> {{bus.dest}} </h4>
+                            <p class="text-light">Depart:  {{bus.time| time:"G\hi" }} | {{bus.date}}</p>
+                            <p class="text-warning text-justify-center"> <i class="fa fa-ticket"> </i> {{bus.price}}</p>
+
+                        </div>
+                    </div>
+                </div>
+                {% endfor%}
+            </div>
+        </div>
+    </section>
+
+
+      
+    <section class="section second-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-6">
+                    <div class="section_title text-center mb_70">
+                        <h2>Des meuilleures villes </h2>
+                        <p> Busticket vous propose des meilleurs lignes </p>
+                    </div>
+                </div>
+            </div>
+            <div class="row popular_destinations">
+                {% for bus in bus %}
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="single_destination" onclick="window.location.href ='{% url 'bus_detail' bus.id %}'">
+                        <div class="thumb">
+                            {% if bus.source == "Parakou" or bus.dest == "Parakou"%}<img src="{% static 'img/dest/cotonou2.jpg' %}" alt="">{%else%}<img src="{% static 'img/dest/cotonou1.jpg' %}" alt=""> {% endif%}
+
+                        </div>
+                        <div class="content">
+                            <p class="text-light text-justify-center mx-3"><i class="fa fa-bus"></i> {{bus.bus_name}} </p>
+                            <p class="text-light mx-2 text-uppercase text-justify-center">{{bus.source}} <i class="fa fa-exchange"></i> {{bus.dest}} </h4>
+                            <p class="text-light">Depart:  {{bus.time| time:"G\hi" }} | {{bus.date}}</p>
+                            <p class="text-warning text-justify-center"> <i class="fa fa-ticket"> </i> {{bus.price}}</p>
+
+                        </div>
+                    </div>
+                </div>
+                {% endfor%}
+            </div>
+        </div>
+    </section>
+
+    
+{% endblock%}
+

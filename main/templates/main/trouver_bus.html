@@ -1,0 +1,71 @@
+{% extends 'main/layout.html' %}
+
+{% load static %}
+{% block title%}Accueil {% endblock%} 
+
+{% block head %}
+    <script type="text/javascript" src="{% static 'js/index.js' %}"></script>
+{% endblock head %}
+
+{% block body %}
+    
+    {% if bus_list%}
+    <div class="container py-5" style="padding-top:50px;">
+        <center><h3 class=" row mb-4 text-justify-center">{% if bus_count == 1 %}Un bus disponible{% else%} {{bus_count}} bus disponible{%endif%} </h3></center>
+        {% for bus in bus_list%}
+        <div class="col-lg-3 col-md-6">
+            <div class="single_destination" onclick="window.location.href ='{% url 'bus_detail' bus.id %}'">
+                <div class="thumb">
+                    {% if bus.source == "Parakou" or bus.dest == "Parakou"%}<img src="{% static 'img/dest/cotonou2.jpg' %}" alt="">{%else%}<img src="{% static 'img/dest/cotonou1.jpg' %}" alt=""> {% endif%}
+                </div>
+                <div class="content">
+                    <p class="text-light text-justify-center mx-3"><i class="fa fa-bus"></i> {{bus.bus_name}} </p>
+                    <p class="text-light mx-2 text-uppercase text-justify-center">{{bus.source}} <i class="fa fa-exchange"></i> {{bus.dest}} </h4>
+                    <p class="text-light">Depart:  {{bus.time| time:"G\hi" }} | {{bus.date}}</p>
+                    <p class="text-warning text-justify-center"> <i class="fa fa-ticket"> </i> {{bus.price}}</p>
+
+                    <button class="btn w-100 text-justify-center" style="background-color:#1B5E20;color:white;"><i class="fas fa-ticket-alt"></i> Reserver ici </button>
+                </div>
+            </div>
+        </div> 
+        {% endfor%}
+        {% else%}
+        <div class="container" style="margin-top:10vh;">
+       <center><h3 class="m-3 text-info"> {{error}}</h3></center>
+        </div>
+
+       {% endif%}
+        <!--<table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Nom du bus</th>
+                    <th>Capacité</th>
+                    <th>Date</th>
+                    <th>Heure</th>
+                    <th>Prix</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for bus in bus_list %}
+                    <tr>
+                        <td>{{ bus.bus_name }}</td>
+                        <td>{{ bus.nbr_passager }}</td>
+                        <td>{{ bus.date }}</td>
+                        <td>{{ bus.time }}</td>
+                        <td>{{ bus.price }}</td>
+                        <td>
+                            <a href="#" class="btn btn-primary">Passer commande</a>
+                        </td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="6">{{error}}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>-->
+    </div>
+</body>
+</html>
+{% endblock%}

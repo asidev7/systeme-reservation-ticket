@@ -1,0 +1,105 @@
+{% extends 'main/layout.html' %}
+
+{% load static %}
+{% block title%}Facture - TicketPoint {% endblock%} 
+
+{% block head %}
+    <script type="text/javascript" src="{% static 'js/index.js' %}"></script>
+{% endblock head %}
+
+{% block body %}
+
+{% if messages %}
+
+{{messages.success}}
+{% endif%}
+{% if bus.nbr_passager < 1 %}
+
+<p class="text-info"> VOus pouvez pas reserver un ticket de {{bus.bus_name}}, car toutes les places sont occupées </p>
+      <a href="{% url 'bus'%}">Cliquez ici pour trouver d'autres campagnies </a>
+
+{% else%}
+    <div class="container my-4">
+        <h1 class="mb-4">Reservation du ticket</h1>
+        <div class="row">
+            <div class="col-md-6">
+                <!-- Afficher les informations du bus -->
+                <small>Confirmer vos informations avant de télécharger le ticket</small>
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <th>Nom:</th>
+                            <td>{{ bus.bus_name }}</td>
+                        </tr>
+                        <tr>
+                            <th>Destination:</th>
+                            <td>{{ bus.dest }}</td>
+                        </tr>
+                        <tr>
+                            <th>Source:</th>
+                            <td>{{ bus.source }}</td>
+                        </tr>
+                        <tr>
+                            <th>Nombre de places disponibles:</th>
+                            <td>{{ bus.nbr_passager }}</td>
+                        </tr>
+                        <tr>
+                            <th>Date de voyage:</th>
+                            <td>{{ bus.date }}</td>
+                        </tr>
+                        <tr>
+                            <th>Heure de depart:</th>
+                            <td>{{ bus.time }}</td>
+                        </tr>
+                        <tr>
+                            <th>Tarif:</th>
+                            <td><b>{{ bus.price }} FCFA</b></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p class="text-justify"><small class="text-info m-0 p-3 ">
+                Cher passager, veuillez noter que le paiement de votre réservation se fera après le téléchargement de votre ticket. Une fois que vous aurez soumis le formulaire de réservation, vous serez redirigé vers une page de facturation où vous pourrez télécharger votre ticket. Une fois que vous avez téléchargé votre ticket, vous pouvez effectuer le paiement en utilisant le mode de paiement( Moov, MTN et Celtis) de votre choix. Nous vous remercions de votre confiance et nous avons hâte de vous accueillir à bord de notre bus.
+                </small></p>
+                
+            </div>
+  
+        <div class="col-md-6 " >
+            <form method="post" action="{% url 'reserve' bus.id %}">
+			{% csrf_token %}
+            <center><small>veuillez le formulaire de Reservation ci-dessous et payez le ticket </small></center>
+			<div class="form-group">
+				<label for="nom">Nom:</label>
+				<input type="text" class="form-control" id="nom" name="nom" placeholder="Idohou" required>
+			</div>
+			<div class="form-group">
+				<label for="prenom">Prénom:</label>
+				<input type="text" class="form-control" id="prenom" name="prenom" placeholder="Augustin" required>
+			</div>
+            <div class="form-group">
+				<label for="email">Adresse email:</label>
+				<input type="text" class="form-control" id="email" name="email"  placeholder=" ticket@point.mail" required>
+			</div>
+			<div class="form-group">
+                <label for="telephone">Téléphone:</label>
+                 <div class="input-group">
+                  <div class="input-group-prepend">
+                    <select class="custom-select" id="country-code" name="country-code" required>
+                      <option value="" selected disabled>Indicatif pays</option>
+                      <option value="+1">+229 (Bénin)</option>
+                      <option value="+33">(Autres)</option>
+                      <!-- Ajouter d'autres options ici -->
+                     </select>
+                </div>                    
+              <input type="tel" id="telephone" class="form-control" name="numero" placeholder="90 77 68 88" minlength="8" maxlength="8" required>
+
+</div>
+			<div class="form-group">
+				<label for="nombre_de_place">Nombre de places:</label>
+				<input type="number" class="form-control" id="nombre_de_place" name="nombre_de_place" required>
+			</div>
+			<button type="submit" class="btn btn-warning w-100 m-3 text-light ">Réserver & télecharger </button>
+		</form>
+	</div>
+</div>
+{% endif%}
+    {% endblock%}

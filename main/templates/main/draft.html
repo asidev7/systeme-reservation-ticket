@@ -1,0 +1,36 @@
+<div class="search-bus">
+    <div class="container">
+    <form class="search-bus-form" action="" method="post" >
+        {% csrf_token%}
+        <div class="align-items-center">
+            <div class="search-bus-form-data">
+
+                <div class="input-row" style="display: flex;">
+                <p class="text-danger text-justify">Voyagez par bus vers toutes les principales villes du Bénin et parmi de nombreuses autres Destinations, ou Lignes disponibles;                 </div>
+                <div class="input-row">
+                    <label for="bus-from">Ville de depart <small class="text-danger">*</small> </label>
+                    <i class="fa fa-bus"></i><input type="text" name="source" placeholder="De"  class="form-control mr-sm-3" onblur="hideplaces(this)" data-value="{{origin | lower}}" data-list="places_from" autocomplete="off" value="{{origin | upper}}">  <!--list="places_from"-->
+        
+                    
+                    
+                    <span class="star small text-danger" >{{error}}</span>
+                </div>
+                <center><i class="fa fa-ville"></i>                        </center>           
+                <div class="input-row">
+                    <label for="bus_to">Ville d'arrivée: <small class="text-danger">*</small></label>
+                    <i class="fa fa-bus"></i><input type="text" name="dest" placeholder="à"  id="source" list="sources" class="form-control mr-sm-3" onblur="hideplaces(this)" data-value="{{destination | lower}}" data-list="places_to" autocomplete="off" value="{{destination | upper}}">
+                    
+                    
+                    <br><div class="input-row">
+                    <label for="depart_date">Date du voyage <small class="text-danger">*</small></label>
+                    <input type="date" name="date"   placeholder="Date" class="form-control mr-sm-2" value="{{depart_date}}">
+                </div><br>
+                
+                                       
+                <div class="input-row">
+                    <button type="submit" class="btn w-100" style="background-color:#233243;color:white;width:100%;">Trouver un bus</button>
+                </div>
+            </div>
+        </div>
+    </form>
+    </div>

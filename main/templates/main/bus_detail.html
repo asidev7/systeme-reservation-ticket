@@ -1,0 +1,43 @@
+{% extends 'main/layout.html' %}
+
+{% load static %}
+{% block title%}Accueil {% endblock%} 
+
+{% block head %}
+    <script type="text/javascript" src="{% static 'js/index.js' %}"></script>
+{% endblock head %}
+
+{% block body %}
+
+
+
+<table class="table table-striped" style="margin-top:150px;">
+    <thead style="background-color:#1B5E20;color: white;margin:1vh;">
+    <td>Bus</td>
+    <td>Source</td>
+    <td>Destination</td>
+    <td>Place</td>
+    <td>Tarif</td>
+    <td>Date</td>
+    <td>Heure de depart</td>
+    <td>Action</td>
+
+
+    </thead>
+
+    <tr>
+        <td>{{bus.bus_name}}</td>
+        <td>{{bus.source}}</td>
+        <td>{{bus.dest}}</td>
+        <td>{{bus.nbr_passager}}</td>
+        <td>FCFA <b>{{bus.price}}</b></td>
+        <td>{{bus.date}}</td>
+        <td>{{bus.time}}</td>
+        <td class="btn" ><a class="text-light" style="text-decoration:none;" href="{% url 'reserve_confirm' id=bus.id %}"><button class="btn" style="color:white;background-color:blue;font-size:12px;">Ajouter au panier</button></a><button class="btn" style="color:white;background-color:red;margin-left:1vh;font-size:12px;">Annuller</button></td>
+
+
+
+    </tr>
+</table>
+
+{% endblock%}

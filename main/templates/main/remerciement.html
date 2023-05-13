@@ -1,0 +1,18 @@
+
+{% extends 'main/layout.html' %}
+
+{% load static %}
+{% block title%}Accueil {% endblock%} 
+
+{% block head %}
+    <script type="text/javascript" src="{% static 'js/index.js' %}"></script>
+{% endblock head %}
+
+{% block body %}
+<h1>Merci pour votre réservation!</h1>
+
+<p>Votre réservation a été enregistrée avec succès. Vous pouvez télécharger votre ticket de réservation en cliquant sur le lien ci-dessous :</p>
+
+<a href="{{download_url}}">Télécharger le ticket de réservation</a>
+
+{% endblock%}

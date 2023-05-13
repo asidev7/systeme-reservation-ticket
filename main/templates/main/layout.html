@@ -1,0 +1,179 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title%} {% endblock%} | BusTicket </title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.typekit.net/cav5lva.css">
+  <link rel="stylesheet" href="{% static 'css/layout_style.css' %}">
+  <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.css' %}">
+  <link rel="icon" type="image/ico" href="{% static 'img/logo/icon.ico' %}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script type="text/javascript" src="{% static 'js/layout.js' %}"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  {% block head %}
+  {% endblock %}
+</head>
+<body>
+  {% block parentBody %}
+  {% endblock %}
+  
+    <nav class="navbar navbar-expand-lg navbar fixed-top">
+      <a class="navbar-brand" href="{% url 'index' %}">
+        <h3 class="logo"><img src="{% static 'img/logo/logo1.png' %}" height="50" weight="80" alt="">BusTicket</h3>
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    
+      <div class="collapse navbar-collapse"  id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item {% if not page %}active{% endif %}">
+            <a class="nav-link text-secondary" href="{% url 'index' %}">Accueil</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-secondary" href="{% url 'bus' %}">Reservation</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-secondary" href="#">Comment ça fonctionne </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-secondary" href="/about">Blog</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-secondary" href="/contact">Contact</a>
+          </li>
+         
+            
+        </ul>
+        <ul class="navbar-nav">
+          {% if not user.is_authenticated %}
+
+          <li class="nav-item">
+            <a class="nav-link text-secondary"  href="#"><i class="fa fa-question m-1"></i>Aides</a>
+          </li>
+          
+            <li class="nav-item">
+              <button class="btn btn-outline-secondary"  style="border-radius: 25rem;" onclick="window.location.href = '/login';">
+                <svg width="1.1em" height="1.1em" viewBox="0 1.5 16 16" class="bi bi-person-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                </svg>
+                Connexion
+              </button>
+            </li>
+            
+          {% else %}
+            <li class="nav-item dropdown my-account">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:black;">
+                <i class="fa fa-user-circle m-2 " style="color:#ccc;margin:5px"></i>                Mon compte
+              </a>
+            </li>
+
+          <li class="nav-item">
+            <a class="nav-link text-secondary" href="{% url 'logout' %}"><i class="fa fa-sign-out m-2"></i></a>
+          </li>
+                
+                </a>
+              </div>
+            </li>
+          {% endif %}
+        </ul>
+      </div>
+    </nav>
+
+    <main>
+      {% block body %}{% endblock %}
+    </main>
+
+
+    
+
+
+
+
+
+
+
+
+
+    <footer class="footer-section">
+      <div class="footer-top">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-3 col-md-6 col-sm-6">
+              <div class="widget company-intro-widget">
+                <a href="index.html" class="site-logo"><img src="{% static 'img/logo/logo.png'%}" style="width:100px" alt="logo"></a>
+                <p>Notre but est de révolutionner le monde des transports terrestres au Bénin, en vous permettant d’économiser sur vos frais de réservations de ticket bus.</p>
+               </div>
+            </div><!-- widget end -->
+            <div class="col-lg-3 col-md-6 col-sm-6">
+              <div class="widget course-links-widget">
+                <h5 class="widget-title">Populaire lignes</h5>
+                <ul class="courses-link-list">
+                  {% for bus in footbus %}
+                  <li><a href="#"><i class="fas fa-long-arrow-alt-right"></i> {{bus.source}} - {{bus.source}}</a></li>
+                {% endfor%}
+                </ul>
+              </div>
+            </div><!-- widget end -->
+            <div class="col-lg-3 col-md-6 col-sm-6">
+              <div class="widget latest-news-widget">
+                <h5 class="widget-title">Blogs reccent</h5>
+                <ul class="small-post-list">
+                  <li>
+                    <div class="small-post-item">
+                      <a href="#" class="post-date">July 18, 2022</a>
+                      <h6 class="small-post-title"><a href="#">Lorem Ipsum is simply dummy text of the printing.</a></h6>
+                    </div>
+                  </li><!-- small-post-item end -->
+                  <li>
+                    <div class="small-post-item">
+                      <a href="#" class="post-date">July 28, 2018</a>
+                      <h6 class="small-post-title"><a href="#">Lorem Ipsum is simply dummy text of the printing</a></h6>
+                    </div>
+                  </li><!-- small-post-item end -->
+                </ul>
+              </div>
+            </div><!-- widget end -->
+            <div class="col-lg-3 col-md-6 col-sm-6">
+              <div class="widget newsletter-widget">
+                <h5 class="widget-title">Newsletter</h5>
+                <div class="footer-newsletter">
+                  <p>Inscrivez-vous à la Newsletter</p>
+                  <form class="news-letter-form">
+                    <input type="email" name="news-email" id="news-email" placeholder="Your email address">
+                    <input type="submit" value="Send">
+                  </form>
+                </div>
+              </div>
+            </div><!-- widget end -->
+          </div>
+        </div> 
+      </div>
+      <div class="footer-bottom">
+        <div class="container">
+          <div class="row">
+              <div class="col-md-6 col-sm-6 text-sm-left text-center">
+                <span class="copy-right-text">© 2023 <a href="">busticket</a> All Rights Reserved.</span>
+              </div>
+              <div class="col-md-6 col-sm-6">
+                <ul class="terms-privacy d-flex justify-content-sm-end justify-content-center">
+                  <li><a href="#">Terms & Conditions</a></li>
+                  <li><a href="#">Privacy Policy</a></li>
+                </ul>
+              </div>
+          </div>
+        </div>
+      </div><!-- footer-bottom end -->
+    </footer>
+  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="{% static 'js/layout.js' %}"></script>
+</body>
+</html>
